@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r dev_requirements.txt
 
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -53,7 +53,7 @@ jobs:
 
       - name: Build
         run: |
-          python -m build sdist bdist_wheel
+          python -m build
 
       - name: Publish
         uses: pypa/gh-action-pypi-publish@release/v1
