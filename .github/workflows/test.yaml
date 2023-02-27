@@ -1,0 +1,46 @@
+name: test
+on:
+  push:
+    branches:
+      - "main"
+
+permissions: write-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev_requirements.txt
+
+      - name: Run Test
+        run: |
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=py_nullable tests/ | tee pytest-coverage.txt
+
+      - name: Create Coverage Comment
+        id: coverageComment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: pytest-coverage.txt
+          junitxml-path: ./pytest.xml
+
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.3.0
+        with:
+          auth: ${{ secrets.BADGE_GIST }}
+          gistID: 15e55b51670ba3c88767f9402215e901
+          filename: pytest-coverage-comment.json
+          label: Coverage
+          message: ${{ steps.coverageComment.outputs.coverage }}
+          color: ${{ steps.coverageComment.outputs.color }}
+          namedLogo: python
