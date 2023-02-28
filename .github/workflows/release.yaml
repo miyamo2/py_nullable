@@ -5,7 +5,7 @@ on:
       - created
 
 env:
-  VERSION: ${{ github.event.release.tag_name != '' && github.event.release.tag_name || '0.0.0' }}
+  VERSION: ${{ github.event.release.tag_name != '' && github.event.release.tag_name | sed 's/v//' || 'v0.0.0' }}
 
 permissions: write-all
 
