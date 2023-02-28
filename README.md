@@ -93,5 +93,5 @@ pip install -e .
 ### Running Tests
 
 ```sh
-pytest --cov src --cov-branch --cov-report=html
+pytest --cov py_nullable --cov-branch --cov-report=html
 ```
