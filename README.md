@@ -70,7 +70,7 @@ def find_by_id(id: str) -> Optional[YourClass]:
 
 
 nullable: Nullable[YourClass] = find_by_id("B001")
-print(nullable.isEmpty) # Prints False
+print(nullable.isEmpty()) # Prints True
 ```
 
 ## Contributing
