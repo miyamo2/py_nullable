@@ -5,7 +5,7 @@ on:
       - created
 
 env:
-  VERSION: ${{ github.event.release.tag_name != '' && github.event.release.tag_name | sed 's/v//' || 'v0.0.0' }}
+  VERSION: ${{ github.event.release.tag_name != '' && github.event.release.tag_name#'v' || 'v0.0.0' }}
 
 permissions: write-all
 
@@ -32,7 +32,9 @@ jobs:
 
       - name: Replace version
         run: |
-          sed -i "s/__version__ = '\(.*\)'/__version__ = '${{ env.VERSION }}'/" py_nullable/__version__.py
+          version=${{ env.VERSION }}
+          version=${version#v}
+          sed -i "s/__version__ = '\(.*\)'/__version__ = \'${version#v}\'/" py_nullable/__version__.py
 
       - name: Build
         run: |
