@@ -78,7 +78,7 @@ print(nullable.isEmpty()) # Prints True
 ### Create a feature branch
 
 ```sh
-git checkout -b feature/{example}
+git checkout -b feature_{example}
 ```
 
 ### Set up your environment
