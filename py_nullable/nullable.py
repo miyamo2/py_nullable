@@ -80,9 +80,10 @@ class Nullable(Generic[T]):
                 print(val)
             some string
         """
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             raise EmptyValueException()
-        return self.__value
+        return value
 
     def orElse(self, other: T) -> T:
         """
@@ -101,10 +102,11 @@ class Nullable(Generic[T]):
                 print(val)
             other string
         """
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             return other
         else:
-            return self.__value
+            return value
 
     def orElseGet(
         self,
@@ -137,7 +139,8 @@ class Nullable(Generic[T]):
         """
         result: T
 
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             if not isinstance(supplier, Callable):
                 raise UncallableException(callback=supplier)
             try:
@@ -145,7 +148,7 @@ class Nullable(Generic[T]):
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=supplier)
         else:
-            result = self.__value
+            result = value
 
         return result
 
@@ -181,7 +184,8 @@ class Nullable(Generic[T]):
             1
         """
         exception: Optional[Exception] = None
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             if not isinstance(supplier, Callable):
                 raise UncallableException(callback=supplier)
 
@@ -192,7 +196,7 @@ class Nullable(Generic[T]):
 
             raise exception
         else:
-            return self.__value
+            return value
 
     def ifPresent(self, action: Callable[[T], None]) -> None:
         """
@@ -215,11 +219,12 @@ class Nullable(Generic[T]):
                 nullable.ifPresent(lambda x: print(x))
             some string
         """
-        if self.__value is not None:
+        value: Optional[T] = self.__value
+        if value is None:
             if not isinstance(action, Callable):
                 raise UncallableException(callback=action)
             try:
-                action(self.__value)
+                action(value)
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=action)
 
@@ -258,11 +263,12 @@ class Nullable(Generic[T]):
         if not isinstance(extractor, Callable):
             raise UncallableException(callback=extractor)
 
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             result = Nullable[T](None)
         else:
             try:
-                result = self if extractor(self.__value) else Nullable[T](None)
+                result = self if extractor(value) else Nullable[T](None)
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=extractor)
 
@@ -299,11 +305,12 @@ class Nullable(Generic[T]):
         if not isinstance(mapper, Callable):
             raise UncallableException(callback=mapper)
 
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             result = Nullable(None)
         else:
             try:
-                result = Nullable(mapper(self.__value))
+                result = Nullable(mapper(value))
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=mapper)
 
@@ -344,11 +351,12 @@ class Nullable(Generic[T]):
         if not isinstance(mapper, Callable):
             raise UncallableException(callback=mapper)
 
-        if self.__value is None:
+        value: Optional[T] = self.__value
+        if value is None:
             result = Nullable(None)
         else:
             try:
-                result = mapper(self.__value)
+                result = mapper(value)
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=mapper)
 
@@ -362,6 +370,9 @@ class Nullable(Generic[T]):
         Nullable object are considered equal...
             * both Nullable have equal type
             * both Nullable have equal value
+
+        Note:
+            T must be a type that overrides the __eq__ method or a built-in type.
 
 
         Args:
@@ -388,7 +399,9 @@ class Nullable(Generic[T]):
                 print(nullable.equals(compare))
             False
         """
+        value = self.__value
+        compare_value = compare_target.__value
         return (
-            isinstance(compare_target.__value, self.__value.__class__)
-            and self.__value == compare_target.__value
+            isinstance(compare_value, value.__class__)
+            and value == compare_value
         )
