@@ -30,6 +30,7 @@ jobs:
       - name: Run Test
         run: |
           pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=py_nullable tests/ | tee pytest-coverage.txt
+          exit ${PIPESTATUS[0]}
 
       - name: Create Coverage Comment
         id: coverageComment
