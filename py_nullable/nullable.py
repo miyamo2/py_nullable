@@ -371,6 +371,9 @@ class Nullable(Generic[T]):
             * both Nullable have equal type
             * both Nullable have equal value
 
+        Note:
+            T must be a type that overrides the __eq__ method or a built-in type.
+
 
         Args:
             compare_target (Nullable[Any]):
