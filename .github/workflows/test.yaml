@@ -5,6 +5,7 @@ on:
       - "main"
       - "dev.*"
       - "feature.*"
+      - "refactor.*"
 
 permissions: write-all
 
