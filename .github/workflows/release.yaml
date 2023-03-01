@@ -28,7 +28,8 @@ jobs:
 
       - name: Run Test
         run: |
-          pytest src/ --cov --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=py_nullable tests/ | tee pytest-coverage.txt
+          exit ${PIPESTATUS[0]}
 
       - name: Replace version
         run: |
