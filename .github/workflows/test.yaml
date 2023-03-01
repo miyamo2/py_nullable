@@ -6,6 +6,7 @@ on:
       - "dev.*"
       - "feature.*"
       - "refactor.*"
+      - "bugfix.*"
 
 permissions: write-all
 
