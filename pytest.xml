@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="40" time="0.490" timestamp="2023-03-01T20:06:10.920148" hostname="ths81000"><testcase classname="tests.test_nullable" name="test_isPresent_case_of_empty" time="0.003" /><testcase classname="tests.test_nullable" name="test_isPresent_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_isEmpty_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_isEmpty_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_get_case_of_present" time="0.002" /><testcase classname="tests.test_nullable" name="test_get_case_of_empty" time="0.013" /><testcase classname="tests.test_nullable" name="test_orElse_case_of_present" time="0.002" /><testcase classname="tests.test_nullable" name="test_orElse_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_orElseGet_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_orElseGet_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_orElseGet_case_of_invalid_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_orElseGet_case_of_incomplete_callback" time="0.019" /><testcase classname="tests.test_nullable" name="test_orElseRaise_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_orElseRaise_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_orElseRaise_case_of_invalid_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_orElseRaise_case_of_incomplete_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_ifPresent_case_of_present" time="0.002"><failure message="assert 5 == 8&#10; +  where 5 = &lt;function ifPresentCallback.&lt;locals&gt;.get at 0x000002105D6DFD00&gt;()">def test_ifPresent_case_of_present():
+        excepted: int = 8
+        target: Nullable[int] = Nullable[int](3)
+        callback, actual = ifPresentCallback(5)[:2]
+        target.ifPresent(callback)
+    
+&gt;       assert actual() == excepted
+E       assert 5 == 8
+E        +  where 5 = &lt;function ifPresentCallback.&lt;locals&gt;.get at 0x000002105D6DFD00&gt;()
+
+tests\test_nullable.py:184: AssertionError</failure></testcase><testcase classname="tests.test_nullable" name="test_ifPresent_case_of_empty" time="0.007"><failure message="py_nullable.exception.IncompleteCallBackException: {&#10;  &quot;message&quot;: &quot;Callback is Incompleted `    def add(y: int):\n        nonlocal x\n        x += y\n`.&quot;,&#10;  &quot;at&quot;: &quot;c:\\Users\\ths81000\\Desktop\\py_nullable\\tests\\test_nullable.py#test_ifPresent_case_of_empty 191 line&quot;,&#10;  &quot;cause&quot;: &quot;unsupported operand type(s) for +=: 'int' and 'NoneType'&quot;&#10;}">self = &lt;py_nullable.nullable.Nullable object at 0x000002105D66F5B0&gt;
+action = &lt;function ifPresentCallback.&lt;locals&gt;.add at 0x000002105D6DF0A0&gt;
+
+    def ifPresent(self, action: Callable[[T], None]) -&gt; None:
+        """
+        If a value is not None,
+        performs the given action with the value,
+        otherwise does nothing.
+    
+        Args:
+            action (Callable[[T], None]):
+                to be performed, if a value is not None.
+    
+        Raises:
+            UncallableException:
+                if the value is None, and the given action is not callable.
+            IncompleteCallBackException:
+                if the value is None, and the given action raises some exception.
+    
+        Example:
+            &gt;&gt;&gt; nullable: Nullable[str] = Nullable[str]("some string")
+                nullable.ifPresent(lambda x: print(x))
+            some string
+        """
+        value: Optional[T] = self.__value
+        if value is None:
+            if not isinstance(action, Callable):
+                raise UncallableException(callback=action)
+            try:
+&gt;               action(value)
+
+py_nullable\nullable.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+y = None
+
+    def add(y: int):
+        nonlocal x
+&gt;       x += y
+E       TypeError: unsupported operand type(s) for +=: 'int' and 'NoneType'
+
+tests\test_nullable.py:224: TypeError
+
+During handling of the above exception, another exception occurred:
+
+    def test_ifPresent_case_of_empty():
+        excepted: int = 5
+        target: Nullable[int] = Nullable[int](None)
+        callback, actual = ifPresentCallback(5)[:2]
+&gt;       target.ifPresent(callback)
+
+tests\test_nullable.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;py_nullable.nullable.Nullable object at 0x000002105D66F5B0&gt;
+action = &lt;function ifPresentCallback.&lt;locals&gt;.add at 0x000002105D6DF0A0&gt;
+
+    def ifPresent(self, action: Callable[[T], None]) -&gt; None:
+        """
+        If a value is not None,
+        performs the given action with the value,
+        otherwise does nothing.
+    
+        Args:
+            action (Callable[[T], None]):
+                to be performed, if a value is not None.
+    
+        Raises:
+            UncallableException:
+                if the value is None, and the given action is not callable.
+            IncompleteCallBackException:
+                if the value is None, and the given action raises some exception.
+    
+        Example:
+            &gt;&gt;&gt; nullable: Nullable[str] = Nullable[str]("some string")
+                nullable.ifPresent(lambda x: print(x))
+            some string
+        """
+        value: Optional[T] = self.__value
+        if value is None:
+            if not isinstance(action, Callable):
+                raise UncallableException(callback=action)
+            try:
+                action(value)
+            except Exception as e:
+&gt;               raise IncompleteCallBackException(cause=e, callback=action)
+E               py_nullable.exception.IncompleteCallBackException: {
+E                 "message": "Callback is Incompleted `    def add(y: int):\n        nonlocal x\n        x += y\n`.",
+E                 "at": "c:\\Users\\ths81000\\Desktop\\py_nullable\\tests\\test_nullable.py#test_ifPresent_case_of_empty 191 line",
+E                 "cause": "unsupported operand type(s) for +=: 'int' and 'NoneType'"
+E               }
+
+py_nullable\nullable.py:229: IncompleteCallBackException</failure></testcase><testcase classname="tests.test_nullable" name="test_ifPresent_case_of_invalid_callback" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'Exception'&gt;">def test_ifPresent_case_of_invalid_callback():
+        target: Nullable[int] = Nullable[int](3)
+    
+        current_frame = inspect.currentframe()
+        code_type = current_frame.f_code  # type: ignore
+        current_filename: str = code_type.co_filename
+        current_methodname: str = code_type.co_name
+    
+        expected_lineno: int = 0
+&gt;       with pytest.raises(Exception) as excinfo:
+E       Failed: DID NOT RAISE &lt;class 'Exception'&gt;
+
+tests\test_nullable.py:205: Failed</failure></testcase><testcase classname="tests.test_nullable" name="test_ifPresent_case_of_incomplete_callback" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'Exception'&gt;">def test_ifPresent_case_of_incomplete_callback():
+        target: Nullable[int] = Nullable[int](0)
+        display_division = ifPresentCallback(0)[2]
+    
+        current_frame = inspect.currentframe()
+        code_type = current_frame.f_code  # type: ignore
+        current_filename: str = code_type.co_filename
+        current_methodname: str = code_type.co_name
+    
+        expected_lineno: int = 0
+&gt;       with pytest.raises(Exception) as excinfo:
+E       Failed: DID NOT RAISE &lt;class 'Exception'&gt;
+
+tests\test_nullable.py:245: Failed</failure></testcase><testcase classname="tests.test_nullable" name="test_filter_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_filter_case_of_not_matched" time="0.001" /><testcase classname="tests.test_nullable" name="test_filter_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_filter_case_of_invalid_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_filter_case_of_incomplete_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_map_case_of_present" time="0.001" /><testcase classname="tests.test_nullable" name="test_map_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_map_case_of_invalid_callback" time="0.009" /><testcase classname="tests.test_nullable" name="test_map_case_of_incomplete_callback" time="0.010" /><testcase classname="tests.test_nullable" name="test_flatMap_case_of_present" time="0.002" /><testcase classname="tests.test_nullable" name="test_flatMap_case_of_empty" time="0.001" /><testcase classname="tests.test_nullable" name="test_flatMap_case_of_invalid_callback" time="0.009" /><testcase classname="tests.test_nullable" name="test_flatMap_case_of_incomplete_callback" time="0.008" /><testcase classname="tests.test_nullable" name="test_equals_case_of_true" time="0.001" /><testcase classname="tests.test_nullable" name="test_equals_case_of_false" time="0.001" /><testcase classname="tests.test_nullable" name="test_equals_case_of_other_type" time="0.002" /><testcase classname="tests.test_nullable" name="test_raise_incomplete_callback_case_of_built_in_func" time="0.007" /><testcase classname="tests.test_nullable" name="test_exception_stacktrace" time="0.010" /><testcase classname="tests.test_nullable" name="test_nullable_wrap_case_of_str" time="0.001" /><testcase classname="tests.test_nullable" name="test_nullable_wrap_case_of_str_none_union" time="0.001" /></testsuite></testsuites>
