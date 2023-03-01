@@ -220,7 +220,7 @@ class Nullable(Generic[T]):
             some string
         """
         value: Optional[T] = self.__value
-        if value is None:
+        if value is not None:
             if not isinstance(action, Callable):
                 raise UncallableException(callback=action)
             try:
