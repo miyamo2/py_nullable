@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "main"
+      - "dev.*"
+      - "feature.*"
 
 permissions: write-all
 
@@ -35,6 +37,7 @@ jobs:
           junitxml-path: ./pytest.xml
 
       - name: Create Coverage Badge
+        if: ${{ github.ref_name == 'master' }}
         uses: schneegans/dynamic-badges-action@v1.3.0
         with:
           auth: ${{ secrets.BADGE_GIST }}
