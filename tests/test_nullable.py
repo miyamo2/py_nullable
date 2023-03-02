@@ -562,3 +562,12 @@ def return_str_none_union(val: int) -> Union[str, None]:
         return str(val)
     else:
         return None
+
+
+def test_nullable_immutable():
+    nullable: Nullable[str] = Nullable[str]("foo")
+    with pytest.raises(Exception) as excinfo:
+        nullable.__val = "bar"  # type: ignore
+
+    assert excinfo.errisinstance(NotImplementedError)
+    assert nullable.get() == "foo"
