@@ -44,7 +44,7 @@ jobs:
           junitxml-path: ./pytest.xml
 
       - name: Create Coverage Badge
-        if: ${{ github.ref_name == 'main' }} && ${{ matrix.python-version ==  '3.10' }}
+        if: ${{ (github.ref_name == 'main')  && (matrix.python-version == '3.9') }}
         uses: schneegans/dynamic-badges-action@v1.3.0
         with:
           auth: ${{ secrets.BADGE_GIST }}
