@@ -46,6 +46,11 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: Install dependencies ${{ matrix.python-version }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev_requirements.txt
+
       - name: Replace version
         run: |
           tagname=${{ env.VERSION }}
