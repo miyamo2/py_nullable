@@ -42,6 +42,7 @@ jobs:
         with:
           pytest-coverage-path: pytest-coverage.txt
           junitxml-path: ./pytest.xml
+          title: Coverage Report ${{ matrix.python-version }}
 
       - name: Create Coverage Badge
         if: ${{ (github.ref_name == 'main')  && (matrix.python-version == '3.9') }}
