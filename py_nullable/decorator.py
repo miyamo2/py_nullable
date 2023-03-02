@@ -22,7 +22,7 @@ def nullable_wrap(
         ...
         ... nullable: Nullable[YourClass] = find_by_id("B001")
         ... print(nullable.isEmpty())
-            False
+            True
     """
     @functools.wraps(func)
     def _(*args: Any, **kwargs: Any) -> Nullable[T]:
