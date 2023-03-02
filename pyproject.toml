@@ -5,9 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "py_nullable"
 description = "Python's None Wrapper, inspired by java.lang.Optional"
+authors = [{name = "miyamo2thepeople"}]
 readme = "README.md"
 license = {file = "LICENSE"}
-repository = "https://github.com/miyamo2theppl/py_nullable.git"
+urls = {repository = "https://github.com/miyamo2theppl/py_nullable.git"}
 classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
