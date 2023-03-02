@@ -1,5 +1,6 @@
 from __future__ import annotations
 import copy
+import inspect
 from typing import Any, Callable, Generic, Optional, TypeVar
 from .exception\
     import IncompleteCallBackException, EmptyValueException, UncallableException
@@ -28,6 +29,24 @@ class Nullable(Generic[T]):
             val (Optional[T]): None or generic type value
         """
         self.__val = value
+
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        """
+        Note: Nullable is an immutable object.
+        """
+        stack: inspect.FrameInfo = inspect.stack()[1]
+        caller_function: str = stack.function
+        caller_file: str = stack.filename
+
+        allow: bool = any([
+            all(["nullable.py" in caller_file, caller_function == "__init__"]),
+            all(["typing.py" in caller_file, caller_function == "__call__"])
+        ])
+
+        if allow:
+            return super().__setattr__(__name, __value)
+        else:
+            raise NotImplementedError
 
     @property
     def __value(self) -> Optional[T]:
@@ -178,7 +197,8 @@ class Nullable(Generic[T]):
         Example:
             >>> nullable: Nullable[str] = Nullable[str](None)
                 try:
-                    val: str = nullable.orElseRaise(lambda x: Exception(str(x)), 1)
+                    val: str = nullable.orElseRaise(
+                        lambda x: Exception(str(x)), 1)
                 except Exception as e:
                     print(str(e))
             1
@@ -253,7 +273,8 @@ class Nullable(Generic[T]):
 
         Example:
             >>> nullable: Nullable[str] = Nullable[str]("1")
-                result: Nullable[str] = nullable.filter(lambda x: lambda x: x.isdigit())
+                result: Nullable[str] = nullable.filter(
+                    lambda x: lambda x: x.isdigit())
                 val: str = result.get()
                 print(val)
             1
@@ -341,7 +362,8 @@ class Nullable(Generic[T]):
 
         Examples:
             >>> nullable: Nullable[str] = Nullable[str]("1234")
-                callback: Callable[[str], Nullable[int]] = lambda x: Nullable[int](int(x) * 2)
+                callback: Callable[[str], Nullable[int]
+                    ] = lambda x: Nullable[int](int(x) * 2)
                 result = target.flatMap(mapper=callback)
                 print(result.get())
             2468
