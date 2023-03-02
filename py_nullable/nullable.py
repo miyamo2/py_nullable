@@ -224,6 +224,9 @@ class Nullable(Generic[T]):
         performs the given action with the value,
         otherwise does nothing.
 
+        Note:
+            Only this method allows value to be passing by reference
+
         Args:
             action (Callable[[T], None]):
                 to be performed, if a value is not None.
@@ -239,7 +242,8 @@ class Nullable(Generic[T]):
                 nullable.ifPresent(lambda x: print(x))
             some string
         """
-        value: Optional[T] = self.__value
+
+        value: Optional[T] = self.__val
         if value is not None:
             if not isinstance(action, Callable):
                 raise UncallableException(callback=action)

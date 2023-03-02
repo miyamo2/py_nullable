@@ -7,6 +7,18 @@ from py_nullable import Nullable, nullable_wrap,\
     IncompleteCallBackException
 
 
+class TestTarget:
+
+    def __init__(self, value: int) -> None:
+        self.__value = value
+
+    def setValue(self, value: int) -> None:
+        self.__value = value
+
+    def getValue(self) -> int:
+        return self.__value
+
+
 def test_isPresent_case_of_empty():
     target: Nullable[str] = Nullable[str](None)
     assert not target.isPresent()
@@ -173,6 +185,17 @@ def test_orElseRaise_case_of_incomplete_callback():
     assert json.dumps(
         f"{current_filename}#{current_methodname} {expected_lineno} line"
     ) in actual_message
+
+
+def test_ifPresent_case_of_passing_by_reference_value():
+    test_target: TestTarget = TestTarget(3)
+    nullable: Nullable[TestTarget] = Nullable[TestTarget](test_target)
+    nullable.ifPresent(lambda x: x.setValue(x.getValue() * 2))
+
+    actual: TestTarget = nullable.get()
+
+    assert actual.getValue() == test_target.getValue()
+    assert actual != test_target
 
 
 def test_ifPresent_case_of_present():
