@@ -9,8 +9,11 @@ readme = "README.md"
 license = {file = "LICENSE"}
 repository = "https://github.com/miyamo2theppl/py_nullable.git"
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
 ]
+requires-python = ">=3.9,<3.12"
 dynamic = ["version"]
 
 [tool.setuptools.package-data]
