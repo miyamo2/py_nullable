@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Python's None Wrapper, inspired by java.lang.Optional
+Python's None Wrapper, inspired by java.util.Optional
 
 ## Getting Started
 
