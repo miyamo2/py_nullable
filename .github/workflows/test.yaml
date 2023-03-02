@@ -8,27 +8,30 @@ on:
       - "refactor*"
       - "bugfix*"
       - "doc*"
+      - "ci*"
 
 permissions: write-all
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
-
-      - name: Install dependencies
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies ${{ matrix.python-version }}
         run: |
           python -m pip install --upgrade pip
           pip install -r dev_requirements.txt
 
-      - name: Run Test
+      - name: Run Test ${{ matrix.python-version }}
         run: |
           pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=py_nullable tests/ | tee pytest-coverage.txt
           exit ${PIPESTATUS[0]}
@@ -41,7 +44,7 @@ jobs:
           junitxml-path: ./pytest.xml
 
       - name: Create Coverage Badge
-        if: ${{ github.ref_name == 'main' }}
+        if: ${{ (github.ref_name == 'main')  && (matrix.python-version == '3.9') }}
         uses: schneegans/dynamic-badges-action@v1.3.0
         with:
           auth: ${{ secrets.BADGE_GIST }}
