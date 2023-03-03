@@ -1,0 +1,17 @@
+name: readme_cache_clear
+
+on:
+  release:
+    types:
+      - created
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * *"
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: koki-develop/hub-purge-action@v1
+        with:
+          repository: miyamo2theppl/py_nullable
