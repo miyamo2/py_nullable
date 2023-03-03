@@ -317,7 +317,8 @@ class Nullable(Generic[T]):
                 if the given mapper raises some exception.
 
         Returns:
-            Nullable[U]: _description_
+            Nullable[U]:
+                result of applying a mapping function to the value of this Nullable
 
         Examples:
             >>> nullable: Nullable[int] = Nullable[int](1)
@@ -399,7 +400,6 @@ class Nullable(Generic[T]):
 
         Note:
             T must be a type that overrides the __eq__ method or a built-in type.
-
 
         Args:
             compare_target (Nullable[Any]):
