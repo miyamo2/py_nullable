@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "py_nullable"
-description = "Python's None Wrapper, inspired by java.lang.Optional"
+description = "Python's None Wrapper, inspired by java.util.Optional"
 authors = [{name = "miyamo2thepeople"}]
 readme = "README.md"
 license = {file = "LICENSE"}
