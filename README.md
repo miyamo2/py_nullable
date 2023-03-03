@@ -1,6 +1,6 @@
 # py_nullable
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/py_nullable)](https://img.shields.io/pypi/pyversions/py_nullable)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/py_nullable?logo=python&logoColor=yellow)](https://img.shields.io/pypi/pyversions/py_nullable?logo=python&logoColor=yellow)
 [![PyPI](https://img.shields.io/pypi/v/py_nullable?color=blue&logo=pypi&logoColor=yellow)](https://pypi.org/project/py-nullable?latest)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/miyamo2theppl/py_nullable)](https://img.shields.io/github/v/release/miyamo2theppl/py_nullable)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/miyamo2theppl/py_nullable/release.yaml?event=release&logo=github%20actions)](https://github.com/miyamo2theppl/py_nullable/actions?query=workflow%3Arelease)
