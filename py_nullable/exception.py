@@ -59,7 +59,7 @@ class PyNullableError(Exception):
 
         stack_list = stack_list[latest_stack_index:]
 
-        self.__stacktrace = list[Stack]()
+        self.__stacktrace = []
         for stack in stack_list:
             self.__stacktrace.append(
                 Stack(
