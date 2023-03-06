@@ -13,6 +13,26 @@ class Stack:
         self.__functionname: str = functionname
         self.__linenumber: int = linenumber
 
+    def get(self, key: str) -> Any:
+        if key == "FileName":
+            return self.FileName
+        elif key == "FunctionName":
+            return self.FunctionName
+        elif key == "LineNumber":
+            return self.LineNumber
+        else:
+            return None
+
+    def __getitem__(self, key: str):
+        if key == "FileName":
+            return self.FileName
+        elif key == "FunctionName":
+            return self.FunctionName
+        elif key == "LineNumber":
+            return self.LineNumber
+        else:
+            raise KeyError(key)
+
     @property
     def FileName(self) -> str:
         return self.__filename

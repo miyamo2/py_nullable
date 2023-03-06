@@ -539,11 +539,14 @@ def test_exception_stacktrace():
 
     test_stacktrace_stack: Stack = stack_trace[1]
 
-    assert test_stacktrace_stack.FileName == current_filename
+    assert test_stacktrace_stack.get(
+        "FileName") == current_filename
 
-    assert test_stacktrace_stack.FunctionName == current_methodname
+    assert test_stacktrace_stack.get(
+        "FunctionName") == current_methodname
 
-    assert test_stacktrace_stack.LineNumber == expected_lineno
+    assert test_stacktrace_stack.get(
+        "LineNumber") == expected_lineno
 
 
 def test_nullable_wrap_case_of_str():
