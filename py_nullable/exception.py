@@ -4,46 +4,16 @@ import inspect
 import json
 import sys
 from typing import Any, Callable, Optional
+from typing_extensions import TypedDict
 
 
-class Stack:
+class Stack(TypedDict):
 
-    def __init__(self, filename: str, functionname: str, linenumber: int):
-        self.__filename: str = filename
-        self.__functionname: str = functionname
-        self.__linenumber: int = linenumber
+    FileName: str
 
-    def get(self, key: str) -> Any:
-        if key == "FileName":
-            return self.FileName
-        elif key == "FunctionName":
-            return self.FunctionName
-        elif key == "LineNumber":
-            return self.LineNumber
-        else:
-            return None
+    FunctionName: str
 
-    def __getitem__(self, key: str):
-        if key == "FileName":
-            return self.FileName
-        elif key == "FunctionName":
-            return self.FunctionName
-        elif key == "LineNumber":
-            return self.LineNumber
-        else:
-            raise KeyError(key)
-
-    @property
-    def FileName(self) -> str:
-        return self.__filename
-
-    @property
-    def FunctionName(self) -> str:
-        return self.__functionname
-
-    @property
-    def LineNumber(self) -> int:
-        return self.__linenumber
+    LineNumber: int
 
 
 class PyNullableError(Exception):
@@ -83,16 +53,16 @@ class PyNullableError(Exception):
         for stack in stack_list:
             self.__stacktrace.append(
                 Stack(
-                    filename=stack.filename,
-                    functionname=stack.function,
-                    linenumber=stack.lineno
+                    FileName=stack.filename,
+                    FunctionName=stack.function,
+                    LineNumber=stack.lineno
                 )
             )
 
         latest_stack: Stack = self.__stacktrace[1]
-        file_name: str = latest_stack.FileName
-        function_name: str = latest_stack.FunctionName
-        line_no: int = latest_stack.LineNumber
+        file_name: str = latest_stack.get("FileName")
+        function_name: str = latest_stack.get("FunctionName")
+        line_no: int = latest_stack.get("LineNumber")
 
         message_dict: dict[str, Optional[str]] = {
             "message": message,
