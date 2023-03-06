@@ -1,0 +1,67 @@
+name: test
+on:
+  push:
+    branches:
+      - "main"
+      - "dev*"
+      - "feature*"
+      - "refactor*"
+      - "bugfix*"
+      - "doc*"
+      - "ci*"
+
+permissions: write-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        id: setup_python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up Python ${{ matrix.python-version }} Retry
+        if: failure() && steps.setup_python.outcome == 'failure'
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository ppa:deadsnakes/ppa
+          sudo apt install python${{ matrix.python-version }}
+
+      - name: Install dependencies ${{ matrix.python-version }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev_requirements.txt
+
+      - name: Run Test ${{ matrix.python-version }}
+        run: |
+          pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=py_nullable tests/ | tee pytest-coverage.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Create Coverage Comment
+        id: coverageComment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: pytest-coverage.txt
+          junitxml-path: ./pytest.xml
+          title: Coverage Report ${{ matrix.python-version }}
+          badge-title: Coverage ${{ matrix.python-version }}
+
+      - name: Create Coverage Badge
+        if: ${{ (github.ref_name == 'main')  && (matrix.python-version == '3.9') }}
+        uses: schneegans/dynamic-badges-action@v1.3.0
+        with:
+          auth: ${{ secrets.BADGE_GIST }}
+          gistID: 15e55b51670ba3c88767f9402215e901
+          filename: pytest-coverage-comment.json
+          label: Coverage
+          message: ${{ steps.coverageComment.outputs.coverage }}
+          color: ${{ steps.coverageComment.outputs.color }}
+          namedLogo: pytest
