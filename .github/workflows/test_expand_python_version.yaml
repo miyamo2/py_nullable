@@ -1,5 +1,6 @@
-name: test
+name: test_expand_python_version
 on:
+  workflow_dispatch:
   push:
     branches:
       - "main"
