@@ -3,35 +3,17 @@ import copy
 import inspect
 import json
 import sys
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Optional
+from typing_extensions import TypedDict
 
 
-class Stack(Dict[str, Any]):
+class Stack(TypedDict):
 
-    def __init__(self, FileName: str, FunctionName: str, LineNumber: int):
-        self.FileName: str = FileName
-        self.FunctionName: str = FunctionName
-        self.LineNumber: int = LineNumber
+    FileName: str
 
-    def get(self, key: str) -> Any:
-        if key == "FileName":
-            return self.FileName
-        elif key == "FunctionName":
-            return self.FunctionName
-        elif key == "LineNumber":
-            return self.LineNumber
-        else:
-            return None
+    FunctionName: str
 
-    def __getitem__(self, key: str):
-        if key == "FileName":
-            return self.FileName
-        elif key == "FunctionName":
-            return self.FunctionName
-        elif key == "LineNumber":
-            return self.LineNumber
-        else:
-            raise KeyError(key)
+    LineNumber: int
 
 
 class PyNullableError(Exception):
@@ -39,7 +21,7 @@ class PyNullableError(Exception):
     Base Class for py_nullable's Exception.
     """
 
-    __stacktrace: List[Stack]
+    __stacktrace: list[Stack]
 
     def __init__(
             self,
@@ -55,7 +37,7 @@ class PyNullableError(Exception):
         exc_obj = cause if cause is not None\
             else sys.exc_info()[1]  # type: ignore
 
-        stack_list: List[inspect.FrameInfo] = inspect.stack()
+        stack_list: list[inspect.FrameInfo] = inspect.stack()
 
         from_subclasses: bool = not isinstance(self, stack_list[-1].__class__)
 
@@ -78,11 +60,11 @@ class PyNullableError(Exception):
             )
 
         latest_stack: Stack = self.__stacktrace[1]
-        file_name: str = latest_stack.FileName
-        function_name: str = latest_stack.FunctionName
-        line_no: int = latest_stack.LineNumber
+        file_name: str = latest_stack.get("FileName")
+        function_name: str = latest_stack.get("FunctionName")
+        line_no: int = latest_stack.get("LineNumber")
 
-        message_dict: Dict[str, Optional[str]] = {
+        message_dict: dict[str, Optional[str]] = {
             "message": message,
             "at": f"{file_name}#{function_name} {line_no} line"
         }
@@ -129,14 +111,14 @@ class UncallableException(PyNullableError):
             callback (Callable[..., Any]):
                 Callback function that raised the exception.
         """
-        base_class_param: Dict[str, Any]
+        base_class_param: dict[str, Any]
         code: Optional[str]
         try:
             code = str(inspect.getsource(callback.__code__))
         except AttributeError:
             code = str(callback)
 
-        base_class_param: Dict[str, Any] = {
+        base_class_param: dict[str, Any] = {
             "message": f"Callback is not callable `{code}`."}
 
         super().__init__(**base_class_param)
@@ -158,20 +140,17 @@ class IncompleteCallBackException(PyNullableError):
             cause (Optional[Exception], optional):
                 Exception raised in a callback function.
         """
-        base_class_param: Dict[str, Any]
+        base_class_param: dict[str, Any]
         code: Optional[str]
         try:
             code = str(inspect.getsource(callback.__code__))
         except AttributeError:
             code = str(callback)
 
-        base_class_param: Dict[str, Any] = {
+        base_class_param: dict[str, Any] = {
             "message": f"Callback is Incompleted `{code}`."}
 
         if cause is not None:
             base_class_param.update({"cause": cause})
 
         super().__init__(**base_class_param)
-
-
-print(Stack("", "", 1))
