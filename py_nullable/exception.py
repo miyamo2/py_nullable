@@ -3,17 +3,27 @@ import copy
 import inspect
 import json
 import sys
-from typing import Any, Callable, Optional, TypedDict
+from typing import Any, Callable, Optional
 
 
-Stack = TypedDict(
-    "Stack",
-    {
-        "FileName": str,
-        "FunctionName": str,
-        "LineNumber": int
-    }
-)
+class Stack:
+
+    def __init__(self, filename: str, functionname: str, linenumber: int):
+        self.__filename: str = filename
+        self.__functionname: str = functionname
+        self.__linenumber: int = linenumber
+
+    @property
+    def FileName(self) -> str:
+        return self.__filename
+
+    @property
+    def FunctionName(self) -> str:
+        return self.__functionname
+
+    @property
+    def LineNumber(self) -> int:
+        return self.__linenumber
 
 
 class PyNullableError(Exception):
@@ -53,17 +63,16 @@ class PyNullableError(Exception):
         for stack in stack_list:
             self.__stacktrace.append(
                 Stack(
-                    FileName=stack.filename,
-                    FunctionName=stack.function,
-                    LineNumber=stack.lineno
+                    filename=stack.filename,
+                    functionname=stack.function,
+                    linenumber=stack.lineno
                 )
             )
 
         latest_stack: Stack = self.__stacktrace[1]
-        file_name: str = latest_stack.get("FileName")  # type: ignore
-        function_name: str = latest_stack.get(
-            "FunctionName")  # type: ignore
-        line_no: int = latest_stack.get("LineNumber")  # type: ignore
+        file_name: str = latest_stack.FileName
+        function_name: str = latest_stack.FunctionName
+        line_no: int = latest_stack.LineNumber
 
         message_dict: dict[str, Optional[str]] = {
             "message": message,
