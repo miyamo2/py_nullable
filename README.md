@@ -6,6 +6,7 @@
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/miyamo2theppl/py_nullable/release.yaml?event=release&logo=github%20actions)](https://github.com/miyamo2theppl/py_nullable/actions?query=workflow%3Arelease)
 [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/miyamo2theppl/15e55b51670ba3c88767f9402215e901/raw/pytest-coverage-comment.json)](https://github.com/miyamo2theppl/py_nullable/actions?query=workflow%3Atest)
 [![GitHub](https://img.shields.io/github/license/miyamo2theppl/py_nullable)](https://img.shields.io/github/license/miyamo2theppl/py_nullable)
+[![Downloads](https://static.pepy.tech/personalized-badge/py-nullable?period=total&units=international_system&left_color=blue&right_color=yellow&left_text=Downloads)](https://pepy.tech/project/py-nullable)
 
 ## Introduction
 
