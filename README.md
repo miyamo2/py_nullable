@@ -38,7 +38,7 @@ if you want to get value.
 from py_nullable import Nullable
 
 nullable: Nullable[str] = Nullable[str]("some string")
-if nullable.isPresent()
+if nullable.isPresent():
     print(nullable.get()) # Prints some string
 ```
 
