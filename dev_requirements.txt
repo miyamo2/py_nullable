@@ -6,3 +6,5 @@ build
 flake8
 autopep8
 typing_extensions
+Sphinx
+sphinx-rtd-theme
