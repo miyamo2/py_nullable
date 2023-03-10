@@ -21,7 +21,7 @@ jobs:
 
       - name: Create Branch
         run: |
-          branchname="githubaction_sphinx_${{ github.sha }}"
+          branchname="github-action_sphinx_${{ github.sha }}"
           echo "BRANCH_NAME=${branchname}" >> $GITHUB_ENV
           git checkout -b $branchname
 
@@ -44,7 +44,7 @@ jobs:
         run: |
           git add docs/_build/html
           git commit -m "doc: sphinx update ${{ github.sha }}"
-          git push -u origin
+          git push --set-upstream origin ${{ env.BRANCH_NAME }}
 
       - name: pull request
         uses: repo-sync/pull-request@v2
