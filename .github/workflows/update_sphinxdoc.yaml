@@ -19,6 +19,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Create Branch
+        run: |
+          branchname="githubaction_sphinx_${{ env.GITHUB_SHA }}"
+          echo "BRANCH_NAME=${branchname}" >> $GITHUB_ENV
+          git checkout -b $branchname
+
       - name: Install dependencies ${{ matrix.python-version }}
         run: |
           python -m pip install --upgrade pip
@@ -39,3 +45,11 @@ jobs:
           git add docs/_build/html
           git commit -m "doc: sphinx update ${{ env.GITHUB_SHA }}"
           git push
+
+      - name: pull request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.BRANCH_NAME }}
+          destination_branch: main
+          pr_title: Sphinx Update ${{ env.GITHUB_SHA }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
