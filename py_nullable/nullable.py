@@ -32,7 +32,11 @@ class Nullable(Generic[T]):
 
     def __setattr__(self, __name: str, __value: Any) -> None:
         """
-        Note: Nullable is an immutable object.
+        Note:
+            Nullable is readonly object.
+
+            If you want to change the value
+            See: Nullable#ifPresent
         """
         stack: inspect.FrameInfo = inspect.stack()[1]
         caller_function: str = stack.function
@@ -299,7 +303,7 @@ class Nullable(Generic[T]):
 
         return result
 
-    def map(self, mapper: Callable[[T], U]) -> Nullable[U]:
+    def map(self, mapper: Callable[[T], Optional[U]]) -> Nullable[U]:
         """
         If a value is not None,
         returns an Nullable describing the result of applying the given mapper to the value,
