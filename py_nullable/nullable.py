@@ -309,7 +309,8 @@ class Nullable(Generic[T]):
         Args:
             mapper (Callable[[T], U]):
                 the mapping function to apply to a value, if a value is not None.
-                U: The type of the value returned from the mapping function.
+
+                :U: The type of the value returned from the mapping function.
 
         Raises:
             UncallableException:
@@ -351,7 +352,8 @@ class Nullable(Generic[T]):
         Args:
             mapper (Callable[[T], Nullable[U]]):
                 the mapping function to apply to a value, if a value is not None.
-                U:The type of value of the Nullable returned by the mapping function.
+
+                :U:The type of value of the Nullable returned by the mapping function.
 
         Raises:
             UncallableException:
@@ -393,8 +395,10 @@ class Nullable(Generic[T]):
 
         If the two conditions are satisfied,
         Nullable object are considered equal...
-        * both Nullable have equal type
-        * both Nullable have equal value
+
+        - both Nullable have equal type
+
+        - both Nullable have equal value
 
         Note:
             T must be a type that overrides the __eq__ method or a built-in type.
