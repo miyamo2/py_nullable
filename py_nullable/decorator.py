@@ -1,3 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""py_nullable's decorator function
+
+Function:
+    * nullable_wrap
+
+"""
 import functools
 from typing import Any, Callable, Optional, TypeVar
 from .nullable import Nullable
