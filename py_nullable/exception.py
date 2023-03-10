@@ -39,8 +39,7 @@ class PyNullableError(Exception):
             self,
             cause: Optional[Exception] = None,
             message: Optional[str] = None):
-        """
-        constructor.
+        """constructor.
 
         Args:
             cause (Optional[Exception], optional): causal error.
@@ -116,8 +115,7 @@ class UncallableException(PyNullableError):
     """
 
     def __init__(self, callback: Callable[..., Any]) -> None:
-        """
-        constructor.
+        """constructor.
 
         Args:
             callback (Callable[..., Any]):
@@ -143,8 +141,7 @@ class IncompleteCallBackException(PyNullableError):
 
     def __init__(self, callback: Callable[..., Any],
                  cause: Optional[Exception] = None) -> None:
-        """
-        constructor.
+        """constructor.
 
         Args:
             callback (Callable[..., Any]):

@@ -16,8 +16,7 @@ T = TypeVar("T")
 def nullable_wrap(
     func: Callable[..., Optional[T]]
 ) -> Callable[..., Nullable[T]]:
-    """
-    Decorator that wraps the return value of an Optional[T] type in Nullable[T]
+    """Decorator that wraps the return value of an Optional[T] type in Nullable[T]
 
     Example:
         >>> in_memory_db: dict[str, YourClass] = {"A001": YourClass("foo")}

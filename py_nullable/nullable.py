@@ -18,8 +18,7 @@ U = TypeVar('U')
 
 
 class Nullable(Generic[T]):
-    """
-    Wrap instances of generic type or None.
+    """Wrap instances of generic type or None.
 
     Attributes:
         __val (Optional[T]): None or generic type value
@@ -30,8 +29,7 @@ class Nullable(Generic[T]):
     __val: Optional[T]
 
     def __init__(self, value: Optional[T] = None) -> None:
-        """
-        constructor.
+        """constructor.
 
         Args:
             val (Optional[T]): None or generic type value
@@ -39,7 +37,7 @@ class Nullable(Generic[T]):
         self.__val = value
 
     def __setattr__(self, __name: str, __value: Any) -> None:
-        """
+        """ override __setattr__
         Note:
             Nullable is readonly object.
 
@@ -65,8 +63,7 @@ class Nullable(Generic[T]):
         return copy.deepcopy(self.__val)
 
     def isPresent(self) -> bool:
-        """
-        If a value is not None, returns true, otherwise false.
+        """If a value is not None, returns true, otherwise false.
 
         Returns:
             bool: true if a value is not None, otherwise false.
@@ -80,8 +77,7 @@ class Nullable(Generic[T]):
         return self.__value is not None
 
     def isEmpty(self) -> bool:
-        """
-        If a value is None, returns true, otherwise false.
+        """If a value is None, returns true, otherwise false.
 
         Returns:
             bool: true if a value is None, otherwise false.
@@ -95,8 +91,7 @@ class Nullable(Generic[T]):
         return self.__value is None
 
     def get(self) -> T:
-        """
-        If a value is not None, returns the value,
+        """If a value is not None, returns the value,
         otherwise raises EmptyValueException.
 
         Raises:
@@ -117,8 +112,7 @@ class Nullable(Generic[T]):
         return value
 
     def orElse(self, other: T) -> T:
-        """
-        If a value is not None, returns the value,
+        """If a value is not None, returns the value,
         otherwise returns other.
 
         Args:
@@ -145,8 +139,7 @@ class Nullable(Generic[T]):
         *args: Any,
         **kwargs: Any
     ) -> T:
-        """
-        If a value is not None, returns the value,
+        """If a value is not None, returns the value,
         otherwise returns the result produced by the supplier.
 
         Args:
@@ -189,8 +182,7 @@ class Nullable(Generic[T]):
         *args: Any,
         **kwargs: Any
     ) -> T:
-        """
-        If a value is present, returns the value,
+        """If a value is present, returns the value,
         otherwise raises an exception produced by the supplier.
 
         Args:
@@ -231,8 +223,7 @@ class Nullable(Generic[T]):
             return value
 
     def ifPresent(self, action: Callable[[T], None]) -> None:
-        """
-        If a value is not None,
+        """If a value is not None,
         performs the given action with the value,
         otherwise does nothing.
 
@@ -265,8 +256,7 @@ class Nullable(Generic[T]):
                 raise IncompleteCallBackException(cause=e, callback=action)
 
     def filter(self, extractor: Callable[[T], bool]) -> Nullable[T]:
-        """
-        If a value is not None,
+        """If a value is not None,
         and the value matches the given extractor,
         returns an Optional describing the value,
         otherwise returns an empty Optional.
@@ -312,15 +302,15 @@ class Nullable(Generic[T]):
         return result
 
     def map(self, mapper: Callable[[T], Optional[U]]) -> Nullable[U]:
-        """
-        If a value is not None,
+        """If a value is not None,
         returns an Nullable describing the result of applying the given mapper to the value,
         otherwise returns an empty Nullable.
 
         Args:
             mapper (Callable[[T], U]):
                 the mapping function to apply to a value, if a value is not None.
-                U: The type of the value returned from the mapping function.
+
+                :U: The type of the value returned from the mapping function.
 
         Raises:
             UncallableException:
@@ -355,16 +345,15 @@ class Nullable(Generic[T]):
         return result
 
     def flatMap(self, mapper: Callable[[T], Nullable[U]]) -> Nullable[U]:
-        """
-        If a value is not None,
+        """If a value is not None,
         returns the result of applying the given mapper to the value,
         otherwise returns an empty Nullable.
 
         Args:
             mapper (Callable[[T], Nullable[U]]):
                 the mapping function to apply to a value, if a value is not None.
-                U:
-                    The type of value of the Nullable returned by the mapping function.
+
+                :U:The type of value of the Nullable returned by the mapping function.
 
         Raises:
             UncallableException:
@@ -402,13 +391,14 @@ class Nullable(Generic[T]):
         return result
 
     def equals(self, compare_target: Nullable[Any]) -> bool:
-        """
-        Compare whether two Nullable object are equal.
+        """Compare whether two Nullable object are equal.
 
         If the two conditions are satisfied,
         Nullable object are considered equal...
-            * both Nullable have equal type
-            * both Nullable have equal value
+
+        - both Nullable have equal type
+
+        - both Nullable have equal value
 
         Note:
             T must be a type that overrides the __eq__ method or a built-in type.
