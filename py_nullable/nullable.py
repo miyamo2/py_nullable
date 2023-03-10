@@ -1,3 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""py_nullable's primary feature
+
+Class:
+    * Nullable
+
+"""
 from __future__ import annotations
 import copy
 import inspect

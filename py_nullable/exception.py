@@ -1,3 +1,15 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""py_nullable's error
+
+Class:
+    * Stack
+    * PyNullableError
+    * EmptyValueException
+    * UncallableException
+    * IncompleteCallBackException
+
+"""
 from __future__ import annotations
 import copy
 import inspect
