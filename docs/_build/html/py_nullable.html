@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>py_nullable package &mdash; py_nullable  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            py_nullable
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">py_nullable package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-py_nullable.decorator">py_nullable.decorator module</a><ul>
+<li><a class="reference internal" href="#py_nullable.decorator.nullable_wrap"><code class="docutils literal notranslate"><span class="pre">nullable_wrap()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-py_nullable.exception">py_nullable.exception module</a><ul>
+<li><a class="reference internal" href="#py_nullable.exception.EmptyValueException"><code class="docutils literal notranslate"><span class="pre">EmptyValueException</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException"><code class="docutils literal notranslate"><span class="pre">IncompleteCallBackException</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.exception.PyNullableError"><code class="docutils literal notranslate"><span class="pre">PyNullableError</span></code></a><ul>
+<li><a class="reference internal" href="#py_nullable.exception.PyNullableError.stacktrace"><code class="docutils literal notranslate"><span class="pre">PyNullableError.stacktrace</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#py_nullable.exception.Stack"><code class="docutils literal notranslate"><span class="pre">Stack</span></code></a><ul>
+<li><a class="reference internal" href="#py_nullable.exception.Stack.FileName"><code class="docutils literal notranslate"><span class="pre">Stack.FileName</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.exception.Stack.FunctionName"><code class="docutils literal notranslate"><span class="pre">Stack.FunctionName</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.exception.Stack.LineNumber"><code class="docutils literal notranslate"><span class="pre">Stack.LineNumber</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#py_nullable.exception.UncallableException"><code class="docutils literal notranslate"><span class="pre">UncallableException</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-py_nullable.nullable">py_nullable.nullable module</a><ul>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable"><code class="docutils literal notranslate"><span class="pre">Nullable</span></code></a><ul>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.__val"><code class="docutils literal notranslate"><span class="pre">Nullable.__val</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.equals"><code class="docutils literal notranslate"><span class="pre">Nullable.equals()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.filter"><code class="docutils literal notranslate"><span class="pre">Nullable.filter()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.flatMap"><code class="docutils literal notranslate"><span class="pre">Nullable.flatMap()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.get"><code class="docutils literal notranslate"><span class="pre">Nullable.get()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.ifPresent"><code class="docutils literal notranslate"><span class="pre">Nullable.ifPresent()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.isEmpty"><code class="docutils literal notranslate"><span class="pre">Nullable.isEmpty()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.isPresent"><code class="docutils literal notranslate"><span class="pre">Nullable.isPresent()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.map"><code class="docutils literal notranslate"><span class="pre">Nullable.map()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.orElse"><code class="docutils literal notranslate"><span class="pre">Nullable.orElse()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.orElseGet"><code class="docutils literal notranslate"><span class="pre">Nullable.orElseGet()</span></code></a></li>
+<li><a class="reference internal" href="#py_nullable.nullable.Nullable.orElseRaise"><code class="docutils literal notranslate"><span class="pre">Nullable.orElseRaise()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-py_nullable">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">py_nullable</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">py_nullable package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/py_nullable.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="py-nullable-package">
+<h1>py_nullable package<a class="headerlink" href="#py-nullable-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-py_nullable.decorator">
+<span id="py-nullable-decorator-module"></span><h2>py_nullable.decorator module<a class="headerlink" href="#module-py_nullable.decorator" title="Permalink to this heading"></a></h2>
+<p>py_nullable’s decorator function</p>
+<dl class="simple">
+<dt>Function:</dt><dd><ul class="simple">
+<li><p>nullable_wrap</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="py_nullable.decorator.nullable_wrap">
+<span class="sig-prename descclassname"><span class="pre">py_nullable.decorator.</span></span><span class="sig-name descname"><span class="pre">nullable_wrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#py_nullable.decorator.nullable_wrap" title="Permalink to this definition"></a></dt>
+<dd><p>Decorator that wraps the return value of an Optional[T] type in Nullable[T]</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">in_memory_db</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">YourClass</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A001&quot;</span><span class="p">:</span> <span class="n">YourClass</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)}</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">... </span><span class="nd">@nullable_wrap</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">find_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">YourClass</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">in_memory_db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">... </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">YourClass</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_by_id</span><span class="p">(</span><span class="s2">&quot;B001&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="nb">print</span><span class="p">(</span><span class="n">nullable</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span>
+<span class="go">    True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-py_nullable.exception">
+<span id="py-nullable-exception-module"></span><h2>py_nullable.exception module<a class="headerlink" href="#module-py_nullable.exception" title="Permalink to this heading"></a></h2>
+<p>py_nullable’s error</p>
+<dl class="simple">
+<dt>Class:</dt><dd><ul class="simple">
+<li><p>Stack</p></li>
+<li><p>PyNullableError</p></li>
+<li><p>EmptyValueException</p></li>
+<li><p>UncallableException</p></li>
+<li><p>IncompleteCallBackException</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="py_nullable.exception.EmptyValueException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.exception.</span></span><span class="sig-name descname"><span class="pre">EmptyValueException</span></span><a class="headerlink" href="#py_nullable.exception.EmptyValueException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#py_nullable.exception.PyNullableError" title="py_nullable.exception.PyNullableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyNullableError</span></code></a></p>
+<p>Indicates that the Nullable’s value was None
+with behavior that should not have been None.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="py_nullable.exception.IncompleteCallBackException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.exception.</span></span><span class="sig-name descname"><span class="pre">IncompleteCallBackException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cause</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_nullable.exception.IncompleteCallBackException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#py_nullable.exception.PyNullableError" title="py_nullable.exception.PyNullableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyNullableError</span></code></a></p>
+<p>Indicates that the callback did not complete successfully.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="py_nullable.exception.PyNullableError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.exception.</span></span><span class="sig-name descname"><span class="pre">PyNullableError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cause</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_nullable.exception.PyNullableError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base Class for py_nullable’s Exception.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="py_nullable.exception.PyNullableError.stacktrace">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stacktrace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#py_nullable.exception.Stack" title="py_nullable.exception.Stack"><span class="pre">py_nullable.exception.Stack</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#py_nullable.exception.PyNullableError.stacktrace" title="Permalink to this definition"></a></dt>
+<dd><p>Returns:
+list[Stack]: stack trace</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="py_nullable.exception.Stack">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.exception.</span></span><span class="sig-name descname"><span class="pre">Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_typename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_nullable.exception.Stack" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="py_nullable.exception.Stack.FileName">
+<span class="sig-name descname"><span class="pre">FileName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#py_nullable.exception.Stack.FileName" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="py_nullable.exception.Stack.FunctionName">
+<span class="sig-name descname"><span class="pre">FunctionName</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#py_nullable.exception.Stack.FunctionName" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="py_nullable.exception.Stack.LineNumber">
+<span class="sig-name descname"><span class="pre">LineNumber</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#py_nullable.exception.Stack.LineNumber" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="py_nullable.exception.UncallableException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.exception.</span></span><span class="sig-name descname"><span class="pre">UncallableException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_nullable.exception.UncallableException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#py_nullable.exception.PyNullableError" title="py_nullable.exception.PyNullableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyNullableError</span></code></a></p>
+<p>Indicates that the callback was not callable.</p>
+</dd></dl>
+
+</section>
+<section id="module-py_nullable.nullable">
+<span id="py-nullable-nullable-module"></span><h2>py_nullable.nullable module<a class="headerlink" href="#module-py_nullable.nullable" title="Permalink to this heading"></a></h2>
+<p>py_nullable’s primary feature</p>
+<dl class="simple">
+<dt>Class:</dt><dd><ul class="simple">
+<li><p>Nullable</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_nullable.nullable.</span></span><span class="sig-name descname"><span class="pre">Nullable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_nullable.nullable.Nullable" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>Wrap instances of generic type or None.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.__val">
+<span class="sig-name descname"><span class="pre">__val</span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.__val" title="Permalink to this definition"></a></dt>
+<dd><p>None or generic type value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.equals">
+<span class="sig-name descname"><span class="pre">equals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compare_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.equals" title="Permalink to this definition"></a></dt>
+<dd><p>Compare whether two Nullable object are equal.</p>
+<p>If the two conditions are satisfied,
+Nullable object are considered equal…</p>
+<ul class="simple">
+<li><p>both Nullable have equal type</p></li>
+<li><p>both Nullable have equal value</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T must be a type that overrides the __eq__ method or a built-in type.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>compare_target</strong> (<a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><em>Nullable</em></a><em>[</em><em>Any</em><em>]</em>) – Nullable object to be tested for equality.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if the compare_target is “equal to” this object otherwise false.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;1234&quot;</span><span class="p">)</span>
+<span class="go">    compare: Nullable[str] = Nullable[str](&quot;1234&quot;)</span>
+<span class="go">    print(nullable.equals(compare))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;1234&quot;</span><span class="p">)</span>
+<span class="go">    compare: Nullable[str] = Nullable[str](&quot;12345&quot;)</span>
+<span class="go">    print(nullable.equals(compare))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;1234&quot;</span><span class="p">)</span>
+<span class="go">    compare: Nullable[int] = Nullable[int](1234)</span>
+<span class="go">    print(nullable.equals(compare))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extractor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.filter" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None,
+and the value matches the given extractor,
+returns an Optional describing the value,
+otherwise returns an empty Optional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>extractor</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – the extract to apply to a value, if a value is not None.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the given extractor is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the given extractor raises some exception.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Nullable describing the value of this Nullable,
+if a value is not None and the value matches the given extractor,
+otherwise an empty Nullable</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable">Nullable</a>[T]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="go">    result: Nullable[str] = nullable.filter(</span>
+<span class="go">        lambda x: lambda x: x.isdigit())</span>
+<span class="go">    val: str = result.get()</span>
+<span class="go">    print(val)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.flatMap">
+<span class="sig-name descname"><span class="pre">flatMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.flatMap" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None,
+returns the result of applying the given mapper to the value,
+otherwise returns an empty Nullable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mapper</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><em>Nullable</em></a><em>[</em><em>U</em><em>]</em><em>]</em>) – <p>the mapping function to apply to a value, if a value is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">U<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The type of value of the Nullable returned by the mapping function.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the mapper is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the mapper raises some exception.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the result of applying a Nullable-bearing mapper to the value of this Nullable,
+if a value is not None, otherwise an empty Nullable.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable">Nullable</a>[U]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;1234&quot;</span><span class="p">)</span>
+<span class="go">    callback: Callable[[str], Nullable[int]</span>
+<span class="go">        ] = lambda x: Nullable[int](int(x) * 2)</span>
+<span class="go">    result = target.flatMap(mapper=callback)</span>
+<span class="go">    print(result.get())</span>
+<span class="go">2468</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.get" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None, returns the value,
+otherwise raises EmptyValueException.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#py_nullable.exception.EmptyValueException" title="py_nullable.exception.EmptyValueException"><strong>EmptyValueException</strong></a> – If a value is None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If a value is not None, returns the value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;some string&quot;</span><span class="p">)</span>
+<span class="go">    val: str = nullable.get()</span>
+<span class="go">    print(val)</span>
+<span class="go">some string</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.ifPresent">
+<span class="sig-name descname"><span class="pre">ifPresent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.ifPresent" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None,
+performs the given action with the value,
+otherwise does nothing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only this method allows value to be passing by reference</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>None</em><em>]</em>) – to be performed, if a value is not None.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the value is None, and the given action is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the value is None, and the given action raises some exception.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;some string&quot;</span><span class="p">)</span>
+<span class="go">    nullable.ifPresent(lambda x: print(x))</span>
+<span class="go">some string</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.isEmpty">
+<span class="sig-name descname"><span class="pre">isEmpty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.isEmpty" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is None, returns true, otherwise false.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if a value is None, otherwise false.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">    if nullable.isEmpty():</span>
+<span class="go">        print(&quot;empty obj&quot;)</span>
+<span class="go">empty obj</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.isPresent">
+<span class="sig-name descname"><span class="pre">isPresent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.isPresent" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None, returns true, otherwise false.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if a value is not None, otherwise false.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="s2">&quot;some string&quot;</span><span class="p">)</span>
+<span class="go">    if nullable.isPresent():</span>
+<span class="go">        print(&quot;has valid value&quot;)</span>
+<span class="go">has valid value</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">U</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable"><span class="pre">Nullable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">U</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.map" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None,
+returns an Nullable describing the result of applying the given mapper to the value,
+otherwise returns an empty Nullable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mapper</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>U</em><em>]</em>) – <p>the mapping function to apply to a value, if a value is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">U<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The type of the value returned from the mapping function.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the given mapper is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the given mapper raises some exception.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>result of applying a mapping function to the value of this Nullable</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#py_nullable.nullable.Nullable" title="py_nullable.nullable.Nullable">Nullable</a>[U]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">    result: Nullable[int] = nullable.map(lambda x: x * 2)</span>
+<span class="go">    print(result.get())</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.orElse">
+<span class="sig-name descname"><span class="pre">orElse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.orElse" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None, returns the value,
+otherwise returns other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>T</em>) – to be returned, if value is None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the value, if not None, otherwise other</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">    val: str = nullable.orElse(&quot;other string&quot;)</span>
+<span class="go">    print(val)</span>
+<span class="go">other string</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.orElseGet">
+<span class="sig-name descname"><span class="pre">orElseGet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">supplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.orElseGet" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is not None, returns the value,
+otherwise returns the result produced by the supplier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>supplier</strong> (<em>Callable</em><em>[</em><em>...</em><em>, </em><em>T</em><em>]</em>) – the supplying function that produces a value to be returned.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the value is None, and the given supplier is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the value is None, and the given supplier raises some exception.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the value, if not None, otherwise the result produced by the supplier.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">    val: str = nullable.orElse(lambda x, y: str(x + y), 1, 2)</span>
+<span class="go">    print(val)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="py_nullable.nullable.Nullable.orElseRaise">
+<span class="sig-name descname"><span class="pre">orElseRaise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">supplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Exception</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#py_nullable.nullable.Nullable.orElseRaise" title="Permalink to this definition"></a></dt>
+<dd><p>If a value is present, returns the value,
+otherwise raises an exception produced by the supplier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>supplier</strong> (<em>Callable</em><em>[</em><em>...</em><em>, </em><em>Exception</em><em>]</em>) – the supplying function that produces an exception to be raised.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#py_nullable.exception.UncallableException" title="py_nullable.exception.UncallableException"><strong>UncallableException</strong></a> – if the value is None, and the given supplier is not callable.</p></li>
+<li><p><a class="reference internal" href="#py_nullable.exception.IncompleteCallBackException" title="py_nullable.exception.IncompleteCallBackException"><strong>IncompleteCallBackException</strong></a> – if the value is None, and the given supplier raises some exception.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If a value is not None, returns the value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nullable</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">str</span><span class="p">](</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">    try:</span>
+<span class="go">        val: str = nullable.orElseRaise(</span>
+<span class="go">            lambda x: Exception(str(x)), 1)</span>
+<span class="go">    except Exception as e:</span>
+<span class="go">        print(str(e))</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-py_nullable">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-py_nullable" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, miyamo2theppl.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
