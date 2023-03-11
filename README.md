@@ -12,6 +12,8 @@
 
 Python's None Wrapper, inspired by java.util.Optional
 
+[Document(latest version only)](https://miyamo2theppl.github.io/py_nullable/)
+
 ## Getting Started
 
 ### Installing
