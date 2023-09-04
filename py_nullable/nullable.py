@@ -13,11 +13,11 @@ from typing import Any, Callable, Generic, Optional, TypeVar
 from .exception\
     import IncompleteCallBackException, EmptyValueException, UncallableException
 
-T = TypeVar('T')
-U = TypeVar('U')
+_T = TypeVar('_T')
+_U = TypeVar('_U')
 
 
-class Nullable(Generic[T]):
+class Nullable(Generic[_T]):
     """Wrap instances of generic type or None.
 
     Attributes:
@@ -26,9 +26,9 @@ class Nullable(Generic[T]):
 
     __slots__ = ['__val']
 
-    __val: Optional[T]
+    __val: Optional[_T]
 
-    def __init__(self, value: Optional[T] = None) -> None:
+    def __init__(self, value: Optional[_T] = None) -> None:
         """constructor.
 
         Args:
@@ -59,7 +59,7 @@ class Nullable(Generic[T]):
             raise NotImplementedError
 
     @property
-    def __value(self) -> Optional[T]:
+    def __value(self) -> Optional[_T]:
         return copy.deepcopy(self.__val)
 
     def isPresent(self) -> bool:
@@ -90,7 +90,7 @@ class Nullable(Generic[T]):
         """
         return self.__value is None
 
-    def get(self) -> T:
+    def get(self) -> _T:
         """If a value is not None, returns the value,
         otherwise raises EmptyValueException.
 
@@ -106,12 +106,12 @@ class Nullable(Generic[T]):
                 print(val)
             some string
         """
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             raise EmptyValueException()
         return value
 
-    def orElse(self, other: T) -> T:
+    def orElse(self, other: _T) -> _T:
         """If a value is not None, returns the value,
         otherwise returns other.
 
@@ -127,7 +127,7 @@ class Nullable(Generic[T]):
                 print(val)
             other string
         """
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             return other
         else:
@@ -135,10 +135,10 @@ class Nullable(Generic[T]):
 
     def orElseGet(
         self,
-        supplier: Callable[..., T],
+        supplier: Callable[..., _T],
         *args: Any,
         **kwargs: Any
-    ) -> T:
+    ) -> _T:
         """If a value is not None, returns the value,
         otherwise returns the result produced by the supplier.
 
@@ -161,9 +161,9 @@ class Nullable(Generic[T]):
                 print(val)
             3
         """
-        result: T
+        result: _T
 
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             if not isinstance(supplier, Callable):
                 raise UncallableException(callback=supplier)
@@ -181,7 +181,7 @@ class Nullable(Generic[T]):
         supplier: Callable[..., Exception],
         *args: Any,
         **kwargs: Any
-    ) -> T:
+    ) -> _T:
         """If a value is present, returns the value,
         otherwise raises an exception produced by the supplier.
 
@@ -208,7 +208,7 @@ class Nullable(Generic[T]):
             1
         """
         exception: Optional[Exception] = None
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             if not isinstance(supplier, Callable):
                 raise UncallableException(callback=supplier)
@@ -222,7 +222,7 @@ class Nullable(Generic[T]):
         else:
             return value
 
-    def ifPresent(self, action: Callable[[T], None]) -> None:
+    def ifPresent(self, action: Callable[[_T], None]) -> None:
         """If a value is not None,
         performs the given action with the value,
         otherwise does nothing.
@@ -246,7 +246,7 @@ class Nullable(Generic[T]):
             some string
         """
 
-        value: Optional[T] = self.__val
+        value: Optional[_T] = self.__val
         if value is not None:
             if not isinstance(action, Callable):
                 raise UncallableException(callback=action)
@@ -255,7 +255,7 @@ class Nullable(Generic[T]):
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=action)
 
-    def filter(self, extractor: Callable[[T], bool]) -> Nullable[T]:
+    def filter(self, extractor: Callable[[_T], bool]) -> Nullable[_T]:
         """If a value is not None,
         and the value matches the given extractor,
         returns an Optional describing the value,
@@ -285,23 +285,23 @@ class Nullable(Generic[T]):
                 print(val)
             1
         """
-        result: Nullable[T]
+        result: Nullable[_T]
 
         if not isinstance(extractor, Callable):
             raise UncallableException(callback=extractor)
 
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
-            result = Nullable[T](None)
+            result = Nullable[_T](None)
         else:
             try:
-                result = self if extractor(value) else Nullable[T](None)
+                result = self if extractor(value) else Nullable[_T](None)
             except Exception as e:
                 raise IncompleteCallBackException(cause=e, callback=extractor)
 
         return result
 
-    def map(self, mapper: Callable[[T], Optional[U]]) -> Nullable[U]:
+    def map(self, mapper: Callable[[_T], Optional[_U]]) -> Nullable[_U]:
         """If a value is not None,
         returns an Nullable describing the result of applying the given mapper to the value,
         otherwise returns an empty Nullable.
@@ -328,12 +328,12 @@ class Nullable(Generic[T]):
                 print(result.get())
             2
         """
-        result: Nullable[U]
+        result: Nullable[_U]
 
         if not isinstance(mapper, Callable):
             raise UncallableException(callback=mapper)
 
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             result = Nullable(None)
         else:
@@ -344,7 +344,7 @@ class Nullable(Generic[T]):
 
         return result
 
-    def flatMap(self, mapper: Callable[[T], Nullable[U]]) -> Nullable[U]:
+    def flatMap(self, mapper: Callable[[_T], Nullable[_U]]) -> Nullable[_U]:
         """If a value is not None,
         returns the result of applying the given mapper to the value,
         otherwise returns an empty Nullable.
@@ -374,12 +374,12 @@ class Nullable(Generic[T]):
                 print(result.get())
             2468
         """
-        result: Nullable[U]
+        result: Nullable[_U]
 
         if not isinstance(mapper, Callable):
             raise UncallableException(callback=mapper)
 
-        value: Optional[T] = self.__value
+        value: Optional[_T] = self.__value
         if value is None:
             result = Nullable(None)
         else:

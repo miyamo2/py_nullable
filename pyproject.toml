@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "py_nullable"
 description = "Python's None Wrapper, inspired by java.util.Optional"
-authors = [{name = "miyamo2thepeople"}]
+authors = [{name = "miyamo2theppl"}]
 readme = "README.md"
 license = {file = "LICENSE"}
 urls = {repository = "https://github.com/miyamo2theppl/py_nullable.git"}
@@ -20,6 +20,7 @@ requires-python = ">=3.7,<3.12"
 dependencies = [
     "typing-extensions"
 ]
+keywords = ["None", "null", "nullable", "Java", "Null Safety"]
 dynamic = ["version"]
 
 
