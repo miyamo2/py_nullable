@@ -20,6 +20,7 @@ requires-python = ">=3.7,<3.12"
 dependencies = [
     "typing-extensions"
 ]
+keywords = ["None", "null", "nullable", "Java", "Null Safety"]
 dynamic = ["version"]
 
 
